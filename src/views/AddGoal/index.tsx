@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "./container";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -8,13 +8,19 @@ import { useDispatch } from "react-redux";
 import { Status } from "src/redux/modules/goals/types";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import moment from "moment";
 
 function AddGoal() {
   let history = useHistory();
   const makeGoalState = (duration: string) => {
     let state: Status[] = [];
     for (let i = 0; i < parseInt(duration); i++) {
-      state.push({ status: "coming" });
+      state.push({
+        status: "coming",
+        date: moment()
+          .add(i, "days")
+          .format()
+      });
     }
     return state;
   };
@@ -56,9 +62,6 @@ function AddGoal() {
       setTimeout(() => {
         history.push("/goals");
       }, 500);
-
-      console.log(values);
-      // console.log(JSON.stringify(values, null, 2));
     }
   });
   return <Container formik={formik} />;

@@ -8,6 +8,7 @@ import { rootReducer } from "./redux";
 import { logger } from "redux-logger";
 import thunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
+import { rootSaga } from "src/redux";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,6 +16,8 @@ const store = createStore(
   rootReducer,
   applyMiddleware(sagaMiddleware, logger, thunk)
 );
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

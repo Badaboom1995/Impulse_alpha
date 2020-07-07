@@ -1,15 +1,13 @@
+import { CREATE_USER, USER_SAVED } from "./actionTypes";
+
 const initialState = {};
 
 export function userReducer(state = initialState, action) {
   switch (action.type) {
-    case "LOG_IN":
-      return Object.assign({}, state, {
-        visibilityFilter: action.filter
-      });
-    case "LOG_OUT":
-      return Object.assign({}, state, {
-        visibilityFilter: action.filter
-      });
+    case CREATE_USER:
+      return state;
+    case USER_SAVED:
+      return { ...state, user: action.user };
     default:
       return state;
   }

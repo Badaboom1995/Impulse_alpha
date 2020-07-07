@@ -5,6 +5,7 @@ import { Nav, List, ListItem, Link, Wrapper, Main, MainBody } from "./styled";
 import MainHeader from "src/views/Header";
 import Goals from "src/views/Goals";
 import AddGoalForm from "src/views/AddGoal";
+import Auth from "src/views/Auth";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import generalActions from "src/redux/modules/general/generalActions";
@@ -26,15 +27,25 @@ function AppRouter() {
   return (
     <Router>
       <Wrapper>
-        <Nav>
-          <List>
-            <ListItem>
-              <Link to="/goals">Goals</Link>
-            </ListItem>
-          </List>
-        </Nav>
+        <Switch>
+          <Route path="/" exact></Route>
+          <Route path="/">
+            <Nav>
+              <List>
+                <ListItem>
+                  <Link to="/goals">Goals</Link>
+                </ListItem>
+              </List>
+            </Nav>
+          </Route>
+        </Switch>
         <Main>
-          <MainHeader />
+          <Switch>
+            <Route path="/" exact></Route>
+            <Route path="/">
+              <MainHeader />
+            </Route>
+          </Switch>
           <MainBody>
             <Switch>
               <Route path="/goals">
@@ -43,9 +54,9 @@ function AppRouter() {
               <Route path="/add_goal">
                 <AddGoalForm />
               </Route>
-              {/* <Route path="/" exact>
-                <Dashboard />
-              </Route> */}
+              <Route path="/" exact>
+                <Auth />
+              </Route>
             </Switch>
           </MainBody>
         </Main>

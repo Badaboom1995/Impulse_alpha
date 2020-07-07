@@ -1,39 +1,33 @@
 import React from "react";
 import { AddButton } from "./styled";
-import { Card, FlexWrapper, Button, TextButton, Row } from "src/views/shared";
-import {
-  MainTitle,
-  SecondaryTitle,
-  ParagraphSmall
-} from "src/views/typography";
+import { FlexWrapper, Row } from "src/views/shared";
+import { MainTitle } from "src/views/typography";
 import { useSelector } from "react-redux";
 import GoalCard from "src/views/GoalCard";
 import EditGoal from "src/views/EditGoal";
 import Modal from "src/views/Modal";
+import { StatusValue } from "src/redux/modules/goals/types";
+import DailyActionCard from "./DailyActionCard";
+import { v4 as uuid } from "uuid";
 
-function Container() {
+function Container(props: GoalsPropsInterface) {
   const goals = useSelector((state: any) => state.goals);
-  const actions = [
-    { name: "Evening reading", description: "reading 10 minutes before sleep" },
-    { name: "Morning Excersize", description: "10 minutes excersize" },
-    {
-      name: "Healthy brekfast",
-      description: "Avo toast or oatmeal with fruits"
-    }
-  ];
+  const { changeActionStatus, getDailyActions } = props;
   return (
     <FlexWrapper>
       <MainTitle>Today</MainTitle>
       <Row>
-        {console.log(goals)}
-        {actions.map((item, index) => (
-          <Card noHover display="flex" column key={index}>
-            <SecondaryTitle>{item.name}</SecondaryTitle>
-            <ParagraphSmall pushBottom>{item.description}</ParagraphSmall>
-            <Button>Check</Button>
-            <TextButton type="danger">Skip</TextButton>
-          </Card>
-        ))}
+        {getDailyActions(goals).length
+          ? getDailyActions(goals).map(item => {
+              return (
+                <DailyActionCard
+                  key={uuid()}
+                  item={item}
+                  changeActionStatus={changeActionStatus}
+                />
+              );
+            })
+          : "No more actions today!"}
       </Row>
       <Row>
         <MainTitle>Goals</MainTitle>
@@ -48,3 +42,9 @@ function Container() {
   );
 }
 export default Container;
+
+interface GoalsPropsInterface {
+  checkDailyActionStatus: (any) => boolean;
+  changeActionStatus: (goalId: string, status: StatusValue) => void;
+  getDailyActions: any;
+}

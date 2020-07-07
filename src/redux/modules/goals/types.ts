@@ -1,5 +1,7 @@
+export type StatusValue = "completed" | "skipped" | "coming";
 export interface Status {
-  status: string;
+  status: StatusValue;
+  date: string;
 }
 export interface Goal {
   id: string;

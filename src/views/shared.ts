@@ -61,7 +61,7 @@ export const Card = styled.div`
     position: absolute;
     left:50%;
     top:50%;
-    transform:translate(-50%);
+    transform:translate(-50%,-50%);
     min-width: 300px;
     width: auto;
   `}

@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "src/views/Forms/TextInput";
 import SimpleSelect from "src/views/Forms/Select";
-import Radio from "src/views/Forms/Radio";
 import Button from "@material-ui/core/Button";
 import { FlexWrapper } from "src/views/shared";
 import { MainTitle } from "src/views/typography";
@@ -22,7 +21,6 @@ const SignupForm = (props: EditGoalInterface) => {
     initialValues: {
       name: "Goal one",
       description: "Desc one",
-      duration: "14",
       actionName: "asd",
       actionDesc: "qwe",
       actionTime: "13:00",
@@ -53,7 +51,7 @@ const SignupForm = (props: EditGoalInterface) => {
           handleDelete(goal.id);
         }}
         color="secondary"
-        fontSize="medium"
+        fontSize="small"
       ></DeleteButton>
       <TextInput
         handleChange={formik.handleChange}
@@ -73,18 +71,6 @@ const SignupForm = (props: EditGoalInterface) => {
       >
         Description
       </TextInput>
-      <Radio
-        handleChange={formik.handleChange}
-        mainLabel="Duration"
-        name="duration"
-        value={formik.values.duration}
-        buttons={[
-          { label: "1 week", value: "7" },
-          { label: "2 weeks", value: "14" },
-          { label: "3 weeks", value: "21" },
-          { label: "1 month", value: "30" }
-        ]}
-      />
       <FlexWrapper>
         <TextInput
           formik={formik}

@@ -14,6 +14,9 @@ const Wrapper = styled.div`
   line-height: 1.5;
   overflow: hidden;
 `;
+const Input = styled(TextField)`
+  width: ${props => (props.fullWidth ? "100%" : "auto")};
+`;
 
 const SignupForm = props => {
   const id = uuidv4();
@@ -23,7 +26,7 @@ const SignupForm = props => {
   const errorText = props.formik.errors[props.name];
   return (
     <Wrapper>
-      <TextField
+      <Input
         error={isError}
         helperText={errorText}
         id={id}
@@ -33,6 +36,7 @@ const SignupForm = props => {
         onBlur={props.formik.handleBlur}
         value={props.formik.values[props.name]}
         label={props.children}
+        fullWidth={props.fullWidth}
       />
     </Wrapper>
   );

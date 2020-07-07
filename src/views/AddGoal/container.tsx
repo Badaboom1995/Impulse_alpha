@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import { FlexWrapper } from "src/views/shared";
 import { MainTitle } from "src/views/typography";
 import { timesArray } from "src/constants";
-import MuiAlert from "@material-ui/lab/Alert";
 
 const SignupForm = (props: FormSetting) => {
   const { formik } = props;
@@ -22,6 +21,7 @@ const SignupForm = (props: FormSetting) => {
       >
         Name
       </TextInput>
+
       <TextInput
         formik={formik}
         handleChange={formik.handleChange}
