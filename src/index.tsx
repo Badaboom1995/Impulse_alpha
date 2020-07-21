@@ -21,9 +21,9 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
+    <React.Fragment>
       <AppRouter />
-    </React.StrictMode>
+    </React.Fragment>
   </Provider>,
   document.getElementById("root")
 );

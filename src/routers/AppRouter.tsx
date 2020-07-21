@@ -9,6 +9,7 @@ import Auth from "src/views/Auth";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import generalActions from "src/redux/modules/general/generalActions";
+import userActions from "src/redux/modules/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
 function Alert(props) {
@@ -18,6 +19,8 @@ function Alert(props) {
 function AppRouter() {
   const dispatch = useDispatch();
   const alertOpen = useSelector((state: any) => state.general.alertOpen);
+  const user = useSelector((state: any) => state.user);
+  if (!Object.keys(user).length) dispatch(userActions.getProfile());
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

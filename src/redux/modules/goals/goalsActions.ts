@@ -2,9 +2,11 @@ import {
   ADD_GOAL,
   REMOVE_GOAL,
   CHANGE_CURRENT_STATUS,
+  FETCH_GOALS,
   AddGoalAction,
   RemoveGoalAction,
-  ChangeCurrentStatus
+  ChangeCurrentStatus,
+  FetchGoalsAction
 } from "./actionTypes";
 import { Goal, StatusValue } from "./types";
 
@@ -16,6 +18,9 @@ const addGoal = (goal: Goal): AddGoalAction => ({
 const removeGoal = (id: string): RemoveGoalAction => ({
   type: REMOVE_GOAL,
   id
+});
+const fetchGoals = (): FetchGoalsAction => ({
+  type: FETCH_GOALS
 });
 const changeCurrentStatus = (
   goalId: string,
@@ -29,5 +34,6 @@ const changeCurrentStatus = (
 export default {
   addGoal,
   removeGoal,
-  changeCurrentStatus
+  changeCurrentStatus,
+  fetchGoals
 };

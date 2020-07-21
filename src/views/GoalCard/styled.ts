@@ -16,6 +16,7 @@ const chooseColor = status => {
 export const GoalsList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 `;
 export const GoalStatusWrapper = styled.div`
   display: flex;

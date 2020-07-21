@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "./container";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import goalsActions from "src/redux/modules/goals/goalsActions";
 import generalActions from "src/redux/modules/general/generalActions";
 
 function Goals() {
   const dispatch = useDispatch();
+  const goals = useSelector((state: any) => state.goals);
+  useEffect(() => {
+    if (!goals.length) {
+      dispatch(goalsActions.fetchGoals());
+    }
+  }, []);
   const checkDailyActionStatus = (goalStatusArray: Array<any>): boolean => {
-    const currentAction = goalStatusArray.find(item => {
+    const statusArray = goalStatusArray || [];
+    const currentAction = statusArray.find(item => {
       const today = moment().format();
       return moment(item.date).isSame(today, "day") && item.status === "coming";
     });
