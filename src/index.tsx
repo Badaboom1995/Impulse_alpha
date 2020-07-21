@@ -22,7 +22,8 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>
-      <AppRouter />
+      {/* <AppRouter /> */}
+      Hello
     </React.Fragment>
   </Provider>,
   document.getElementById("root")
