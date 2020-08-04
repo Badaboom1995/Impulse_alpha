@@ -31,7 +31,7 @@ function Goals() {
   };
   const changeActionStatus = (goalId, status) => {
     dispatch(goalsActions.changeCurrentStatus(goalId, status));
-    dispatch(generalActions.openAlert());
+    dispatch(generalActions.openAlert("success", "success"));
   };
   return (
     <Container

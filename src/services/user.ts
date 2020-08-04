@@ -9,6 +9,7 @@ export default class UserService {
       body: JSON.stringify(user)
     });
     const data = await response.json();
+    console.log(data);
     return data;
   }
   async getProfile() {
@@ -20,6 +21,21 @@ export default class UserService {
     );
     const response = await fetch(`${this.serverUrl}/users/me`, {
       method: "GET",
+      headers: requestHeaders
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  }
+
+  async logOut() {
+    const requestHeaders: HeadersInit = new Headers();
+    requestHeaders.append(
+      "Authorization",
+      `Bearer ${window.localStorage.impulseJWT}`
+    );
+    const response = await fetch(`${this.serverUrl}/users/logout`, {
+      method: "POST",
       headers: requestHeaders
     });
     const data = await response.json();

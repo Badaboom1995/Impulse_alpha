@@ -3,8 +3,12 @@ import TextInput from "src/views/Forms/TextInput";
 import Button from "@material-ui/core/Button";
 import { MainTitle } from "src/views/typography";
 import { Card } from "../shared";
+import { useSelector } from "react-redux";
+
 const Auth = (props: AuthInterface) => {
   const { formik } = props;
+  const isLoading = useSelector((state: any) => state.general.localLoading);
+  const ButtonText = isLoading ? "Loading..." : "Submit";
   return (
     <Card modal noHover>
       <form onSubmit={formik.handleSubmit}>
@@ -40,7 +44,7 @@ const Auth = (props: AuthInterface) => {
           Password
         </TextInput>
         <Button type="submit" variant="contained" color="primary">
-          Submit
+          {ButtonText}
         </Button>
       </form>
     </Card>

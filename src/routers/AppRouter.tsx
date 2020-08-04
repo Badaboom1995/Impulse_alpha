@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
 import { Nav, List, ListItem, Link, Wrapper, Main, MainBody } from "./styled";
 import MainHeader from "src/views/Header";
 import Goals from "src/views/Goals";
@@ -11,14 +10,17 @@ import MuiAlert from "@material-ui/lab/Alert";
 import generalActions from "src/redux/modules/general/generalActions";
 import userActions from "src/redux/modules/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "src/views/Loader";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function AppRouter() {
+export default function AppRouter() {
   const dispatch = useDispatch();
   const alertOpen = useSelector((state: any) => state.general.alertOpen);
+  const alertType = useSelector((state: any) => state.general.alertType);
+  const alertMessage = useSelector((state: any) => state.general.alertMessage);
   const user = useSelector((state: any) => state.user);
   if (!Object.keys(user).length) dispatch(userActions.getProfile());
   const handleClose = (event, reason) => {
@@ -27,6 +29,7 @@ function AppRouter() {
     }
     dispatch(generalActions.closeAlert());
   };
+  //
   return (
     <Router>
       <Wrapper>
@@ -63,20 +66,17 @@ function AppRouter() {
             </Switch>
           </MainBody>
         </Main>
+        <Loader></Loader>
         <Snackbar
           open={alertOpen}
           autoHideDuration={2000}
           onClose={handleClose}
         >
-          <Alert onClose={handleClose} severity="success">
-            Success!
+          <Alert onClose={handleClose} severity={alertType}>
+            {alertMessage}
           </Alert>
         </Snackbar>
       </Wrapper>
     </Router>
   );
 }
-const mapStateToProps = state => ({
-  user: state.user
-});
-export default connect(mapStateToProps)(AppRouter);

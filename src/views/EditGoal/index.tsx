@@ -13,7 +13,7 @@ function EditGoal(props: EditGoalInterface) {
   const dispatch = useDispatch();
   const handleDelete = id => {
     dispatch(goalsActions.removeGoal(id));
-    dispatch(generalActions.openAlert());
+    dispatch(generalActions.openAlert("success", "success"));
   };
   return <Container goal={props.goal} handleDelete={handleDelete} />;
 }

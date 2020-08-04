@@ -1,20 +1,27 @@
 import {
   CREATE_USER,
   GET_PROFILE,
+  LOG_OUT,
   GetProfileAction,
-  CreateUserAction
+  CreateUserAction,
+  LogOutAction
 } from "./actionTypes";
 import { User } from "./types";
 
-const createUser = (user: User): CreateUserAction => ({
+const createUser = (user: User, history): CreateUserAction => ({
   type: CREATE_USER,
-  user
+  user,
+  history
 });
 const getProfile = (): GetProfileAction => ({
   type: GET_PROFILE
 });
+const logOut = (): LogOutAction => ({
+  type: LOG_OUT
+});
 
 export default {
   createUser,
-  getProfile
+  getProfile,
+  logOut
 };

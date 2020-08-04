@@ -11,11 +11,14 @@ import {
   CHANGE_CURRENT_STATUS
 } from "./actionTypes";
 import GoalsService from "src/services/goals";
+import { END_LOADING, START_LOADING } from "../general/actionTypes";
 
 function* goalsFetched() {
+  yield put({ type: START_LOADING, loadingType: "globalLoading" });
   const Request = new GoalsService();
   const goals = yield Request.fetchGoals();
   const goalsHandled = goals.map(item => ({ ...item, id: item._id }));
+  yield put({ type: END_LOADING, loadingType: "globalLoading" });
   yield put({ type: GOALS_FETCHED, goals: goalsHandled });
 }
 function* watchGoalsFetch() {
@@ -23,9 +26,11 @@ function* watchGoalsFetch() {
 }
 
 function* goalAdded(action) {
+  yield put({ type: START_LOADING });
   const Request = new GoalsService();
   const goal = yield Request.createGoal(action.goal);
   goal.id = goal._id;
+  yield put({ type: END_LOADING });
   yield put({ type: GOAL_ADDED, goal });
 }
 function* watchAddGoal() {

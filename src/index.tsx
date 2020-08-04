@@ -12,7 +12,7 @@ import { rootSaga } from "src/redux";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
+export const store = createStore(
   rootReducer,
   applyMiddleware(sagaMiddleware, logger, thunk)
 );
@@ -21,9 +21,7 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.Fragment>
-      <AppRouter />
-    </React.Fragment>
+    <AppRouter />
   </Provider>,
   document.getElementById("root")
 );

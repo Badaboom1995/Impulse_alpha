@@ -58,7 +58,7 @@ function AddGoal() {
         state: makeGoalState(duration)
       };
       dispatch(goalsActions.addGoal(goal));
-      dispatch(generalActions.openAlert());
+      dispatch(generalActions.openAlert("success", "success"));
       setTimeout(() => {
         history.push("/goals");
       }, 500);
